@@ -4,6 +4,8 @@
 // When running the script with `npx hardhat run <script>` you'll find the Hardhat
 // Runtime Environment's members available in the global scope.
 const hre = require("hardhat");
+const fs = require('fs');
+const path = require('path');
 
 async function main() {
   // Hardhat always runs the compile task when running scripts with its command
@@ -19,10 +21,19 @@ async function main() {
 
   await certificateOfParticipationNFT.deployed();
 
+  console.log("CertificateOfParticipationNFT deployed to:", certificateOfParticipationNFT.address);
+
+  const { chainId } = await hre.ethers.provider.getNetwork();
+
+  let contractMetaData = {
+    address: certificateOfParticipationNFT.address,
+    chainId: chainId
+  }
+
+  fs.writeFileSync(path.resolve(__dirname, '../frontend/artifacts/contractMetaData.json'), JSON.stringify(contractMetaData));
+
   // wait till the backend propagation happens
   await new Promise((resolve)=> setTimeout(() => resolve(), 60000));
-
-  console.log("CertificateOfParticipationNFT deployed to:", certificateOfParticipationNFT.address);
 
   console.log("Started verifying :", certificateOfParticipationNFT.address);
   await hre.run("verify:verify", {
