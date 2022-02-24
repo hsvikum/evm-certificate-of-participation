@@ -23,15 +23,6 @@ async function main() {
 
   console.log("CertificateOfParticipationNFT deployed to:", certificateOfParticipationNFT.address);
 
-  const { chainId } = await hre.ethers.provider.getNetwork();
-
-  let contractMetaData = {
-    address: certificateOfParticipationNFT.address,
-    chainId: chainId
-  }
-
-  fs.writeFileSync(path.resolve(__dirname, '../frontend/artifacts/contractMetaData.json'), JSON.stringify(contractMetaData));
-
   // wait till the backend propagation happens
   await new Promise((resolve)=> setTimeout(() => resolve(), 60000));
 
@@ -40,6 +31,15 @@ async function main() {
     address: certificateOfParticipationNFT.address
   });
   console.log("Done verifying :", certificateOfParticipationNFT.address);
+
+  const { chainId } = await hre.ethers.provider.getNetwork();
+
+  let contractMetaData = {
+    address: certificateOfParticipationNFT.address,
+    chainId: chainId
+  }
+
+  fs.writeFileSync(path.resolve(__dirname, '../frontend/artifacts/contractMetaData.json'), JSON.stringify(contractMetaData));
 }
 
 // We recommend this pattern to be able to use async/await everywhere
