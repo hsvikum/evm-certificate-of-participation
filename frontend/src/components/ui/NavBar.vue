@@ -1,7 +1,7 @@
 <template>
   <div class="navbar bg-base-100">
     <div class="navbar-start">
-      <a class="btn btn-ghost normal-case text-xl" :href="`https://rinkeby.etherscan.io/address/${contractAddress}`" target="_blank">Orangehrm TECHTALK Participation Certificate (Rinkeby)</a>
+      <a class="btn btn-ghost normal-case text-xl" :href="`https://rinkeby.etherscan.io/address/${contractAddress}`" target="_blank">Developer Training Participation Certificate (Rinkeby)</a>
     </div>
     <div class="navbar-end">
       <a class="btn" :class="{loading: loading}" v-if="props.wallet != ''">{{ props.wallet }}</a>
