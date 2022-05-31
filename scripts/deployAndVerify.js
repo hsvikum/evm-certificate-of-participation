@@ -24,7 +24,7 @@ async function main() {
   console.log("CertificateOfParticipationNFT deployed to:", certificateOfParticipationNFT.address);
 
   // wait till the backend propagation happens
-  await new Promise((resolve)=> setTimeout(() => resolve(), 60000));
+  await new Promise((resolve)=> setTimeout(() => resolve(), 120000));
 
   console.log("Started verifying :", certificateOfParticipationNFT.address);
   await hre.run("verify:verify", {
